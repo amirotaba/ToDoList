@@ -51,14 +51,12 @@ def show():
     records = curr.fetchall()
     table = ttk.Treeview(root)
     table.grid(row=5, column=0, padx=30, pady=5)
-    table['columns'] = ('#1', '#2')
-    table.column('#0', width=50, minwidth=50)
-    table.column('#1', width=100, minwidth=100)
-    table.column('#2', width=100, minwidth=100)
+    table['columns'] = ('#1')
+    table.column('#0', width=100, minwidth=100)
+    table.column('#1', width=150, minwidth=100)
 
     table.heading('#0', text='ID', anchor=N)
     table.heading('#1', text='Task', anchor=N)
-    table.heading('#2', text='Done', anchor=N)
 
     i = 0
     for record in records:
@@ -77,7 +75,7 @@ def show():
     check_button.grid(row=2, column=1, ipadx=25)
     check_all.grid(row=3, column=1, ipadx=10)
 
-    root.geometry("630x510")
+    root.geometry("630x515")
     task_entry.delete(0, END)
 
 
@@ -92,19 +90,17 @@ def check():
              WHERE oid="""+check_entry.get())
         Error.grid_remove()
     except Exception:
-        Error.grid(row=3, column=1, padx=30, pady=5)
+        Error.grid(row=8, column=1, padx=30, pady=0)
     curr.execute('SELECT *,oid FROM done_tasks')
     recordsdone = curr.fetchall()
     table2 = ttk.Treeview(root)
     table2.grid(row=5, column=1, padx=30, pady=5)
-    table2['columns'] = ('#1', '#2')
-    table2.column('#0', width=50, minwidth=50)
-    table2.column('#1', width=100, minwidth=100)
-    table2.column('#2', width=100, minwidth=100)
+    table2['columns'] = ('#1')
+    table2.column('#0', width=100, minwidth=100)
+    table2.column('#1', width=150, minwidth=150)
 
     table2.heading('#0', text='ID', anchor=N)
     table2.heading('#1', text='Task', anchor=N)
-    table2.heading('#2', text='Done', anchor=N)
 
     i = 0
     for record in recordsdone:
@@ -117,7 +113,6 @@ def check():
     clear_done_button = Button(root, text='Clear done tasks', padx=0, pady=0, command=clear_done)
     clear_done_button.grid(row=7, column=1, ipadx=10, ipady=2, pady=5)
 
-    root.geometry("630x490")
     check_entry.delete(0, END)
     show()
 
@@ -134,14 +129,12 @@ def check_all():
     recordsdone = curr.fetchall()
     table2 = ttk.Treeview(root)
     table2.grid(row=5, column=1, padx=30, pady=5)
-    table2['columns'] = ('#1', '#2')
-    table2.column('#0', width=50, minwidth=50)
-    table2.column('#1', width=100, minwidth=100)
-    table2.column('#2', width=100, minwidth=100)
+    table2['columns'] = ('#1')
+    table2.column('#0', width=100, minwidth=100)
+    table2.column('#1', width=150, minwidth=150)
 
     table2.heading('#0', text='ID', anchor=N)
     table2.heading('#1', text='Task', anchor=N)
-    table2.heading('#2', text='Done', anchor=N)
 
     i = 0
     for record in recordsdone:
@@ -154,7 +147,6 @@ def check_all():
     clear_done_button = Button(root, text='Clear done tasks', padx=0, pady=0, command=clear_done)
     clear_done_button.grid(row=7, column=1, ipadx=10, ipady=2, pady=5)
 
-    root.geometry("630x490")
     check_entry.delete(0, END)
     show()
 
@@ -169,7 +161,7 @@ def clear_tasks():
     dbconn.commit()
     dbconn.close()
 
-    show()
+    check()
 
     Error.grid_remove()
 
