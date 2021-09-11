@@ -53,7 +53,7 @@ def show():
     table.grid(row=5, column=0, padx=30, pady=5)
     table['columns'] = ('#1')
     table.column('#0', width=100, minwidth=100)
-    table.column('#1', width=150, minwidth=100)
+    table.column('#1', width=150, minwidth=150)
 
     table.heading('#0', text='ID', anchor=N)
     table.heading('#1', text='Task', anchor=N)
